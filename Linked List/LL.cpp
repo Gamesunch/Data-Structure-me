@@ -157,7 +157,7 @@ public:
         print();
     }
 
-    void print() const {
+    void print() {
         Node* temp = head;
         while (temp != NULL) {
             cout << temp->value << " ";
