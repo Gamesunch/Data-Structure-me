@@ -23,8 +23,8 @@ public:
     LinkedList(){
     	head = NULL;
 	}
-
-    ~LinkedList() {
+    //Destructor
+    ~LinkedList() {  
         clear();
     }
 
