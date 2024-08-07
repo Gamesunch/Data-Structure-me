@@ -68,7 +68,7 @@ public:
         // reset P;
         p = head;
 
-        // Find the node with the 'after' value
+        // Find the node with the 'target' value
         while (p != NULL && p->value != target) {
             p = p->next;
         }
