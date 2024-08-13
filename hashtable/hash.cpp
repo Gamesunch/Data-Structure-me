@@ -35,6 +35,22 @@ class HashTable {
   
     void add(int key, string data) {
       int i = key % SIZE;
+      //find exit key
+      for (int i = 0; i < SIZE; i++) {
+        if(table[i]->key == key){
+          cout<<"Key already exists"<<endl;
+          return;
+        }
+        Node* s = table[i]->next;
+        while (s != NULL) {
+          if(s->key == key){
+            cout<<"Key already exists"<<endl;
+            return;
+          }
+          s = s->next;
+        }
+      }
+
       if (table[i]->key == -1) {
         table[i]->key = key;
         table[i]->data = data;
@@ -84,7 +100,7 @@ int main() {
     if(command == "e"){
       break;
     }
-    
+
     if(command == "a"){
       cin>>key>>data;
       h.add(key, data);
