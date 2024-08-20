@@ -1,10 +1,54 @@
 #include <iostream>
 #include <string>
-#include <stack>
+
+#define SIZE 100
 
 using namespace std;
+
+class stack{
+  public:
+    int topIndex = 0;
+    char st[SIZE];
+
+    bool empty(){
+      if(topIndex == 0){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+
+    bool full(){
+      if(topIndex == SIZE){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+
+    void push(char ch){
+      if(!full()){
+        st[topIndex] = ch;
+        topIndex++;
+      }
+      
+    }
+
+    void pop(){
+      if(!empty()){
+        topIndex--;
+      }
+    }
+
+    char top(){
+      return st[topIndex - 1];
+    }
+};
+
 int main(){
-  stack<char> st;
+  stack st;
 
   string inp;
   char ch;
@@ -63,7 +107,8 @@ int main(){
         ans = 0;
         break;
       }
-      else if(inp[i + 1] == '>'){
+
+      if(inp[i + 1] == '>'){
         for(int j = 0;j<2;j++){
           if(st.top() == '<'){
             st.pop();
