@@ -1,5 +1,5 @@
 #include <iostream>
-#include <queue>  // For BFS
+#include <queue>
 using namespace std;
 
 struct Node {
@@ -31,43 +31,6 @@ Node* findMin(Node* root) {
     return root;
 }
 
-// Function to delete a node from the BST
-Node* deleteNode(Node* root, int key) {
-    if (root == NULL) return root; // Base case: empty tree
-
-    // Recursive calls to find the node to delete
-    if (key < root->key) {
-        root->left = deleteNode(root->left, key);
-    } else if (key > root->key) {
-        root->right = deleteNode(root->right, key);
-    } else {
-        // Node with the key found
-        // Case 1: Node has no children (leaf node)
-        if (root->left == NULL && root->right == NULL) {
-            delete root;
-            root = NULL;
-        }
-        // Case 2: Node has only one child
-        else if (root->left == NULL) {
-            Node* temp = root->right;
-            delete root;
-            return temp;
-        } else if (root->right == NULL) {
-            Node* temp = root->left;
-            delete root;
-            return temp;
-        }
-        // Case 3: Node has two children
-        else {
-            Node* temp = findMin(root->right);  // Find the inorder successor (smallest in the right subtree)
-            root->key = temp->key;  // Replace root's key with inorder successor's key
-            root->right = deleteNode(root->right, temp->key);  // Delete the inorder successor
-        }
-    }
-    return root;
-}
-
-// Function to insert a node in the BST
 Node* insert(Node* root, int key) {
     if (root == NULL) return new Node(key);
     
@@ -78,9 +41,49 @@ Node* insert(Node* root, int key) {
     }
     
     return root;
+} 
+
+// Function to delete a node from the BST
+Node* deleteNode(Node* root, int key) {
+    if (root == NULL) { //if the tree is empty.
+        cout<<"Empty Tree"<<endl;
+        return root;
+    } 
+
+    // Recursive calls to find the node to delete
+    if (key < root->key) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->key) {
+        root->right = deleteNode(root->right, key);
+    } else {
+        // Case 1: Node has no children (leaf node)
+        if (root->left == NULL && root->right == NULL) {
+            delete root;
+            root = NULL;
+            return root;
+        }
+        // Case 2: Node has only one child
+        else if (root->left == NULL) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        }
+        else if (root->right == NULL) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+        // Case 3: Node has two children
+        else {
+            Node* temp = findMin(root->right);
+            root->key = temp->key;
+            root->right = deleteNode(root->right, temp->key);
+        }
+    }
+    return root;
 }
 
-// Function to display the tree in Breadth-First Traversal order
+//Breadth First Traversal
 void showBFS(Node* root) {
     if (root == NULL) return;
 
@@ -93,13 +96,12 @@ void showBFS(Node* root) {
         q.pop();
 
         if (current == NULL) {
-            // End of the current level
             if (!q.empty()) {
-                cout << "|";  // Print level separator
+                cout << "|";
                 q.push(NULL);  // Add marker for next level
             }
         } else {
-            cout << current->key << ",";  // Print the current node
+            cout << current->key << ",";
 
             if (current->left != NULL) q.push(current->left);
             if (current->right != NULL) q.push(current->right);
