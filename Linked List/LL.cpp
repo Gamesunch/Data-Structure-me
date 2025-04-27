@@ -37,6 +37,27 @@ public:
         }
         head = NULL;
     }
+    
+    void insertFirst(int value) {
+    	
+	    // Check if value already exist
+	    Node* p = head;
+	    while (p != NULL) {
+	        if (p->value == value) {
+	            return;
+	        }
+	        p = p->next;
+	    }
+	
+	    Node* node = new Node(value);
+	    node->next = head;
+	    if (head != NULL) {
+	        head->prev = node;
+	    }
+	    head = node;
+	    print();
+	}
+
 
     void insertLast(int value) {
         Node* node = new Node(value);
