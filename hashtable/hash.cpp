@@ -33,17 +33,6 @@ public:
         }
     }
 
-    ~HashTable() {
-        for (int i = 0; i < SIZE; ++i) {
-            Node* curr = table[i];
-            while (curr != NULL) {
-                Node* temp = curr;
-                curr = curr->next;
-                delete temp;
-            }
-        }
-    }
-
     void add(int key, string data) {
         int index = key % SIZE;
 
