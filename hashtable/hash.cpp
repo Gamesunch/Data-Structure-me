@@ -36,7 +36,7 @@ public:
     ~HashTable() {
         for (int i = 0; i < SIZE; ++i) {
             Node* curr = table[i];
-            while (curr != nullptr) {
+            while (curr != NULL) {
                 Node* temp = curr;
                 curr = curr->next;
                 delete temp;
@@ -54,7 +54,7 @@ public:
                 return;
             }
             Node* s = table[j]->next;
-            while (s != nullptr) {
+            while (s != NULL) {
                 if (s->key == key) {
                     cout << "Key already exists" << endl;
                     return;
@@ -69,7 +69,7 @@ public:
             table[index]->data = data;
         } else {
             Node* n = table[index];
-            while (n->next != nullptr) {
+            while (n->next != NULL) {
                 n = n->next;
             }
             n->next = new Node(key, data);
@@ -79,7 +79,7 @@ public:
     string search(int key) {
         int index = key % SIZE;
         Node* n = table[index];
-        while (n != nullptr) {
+        while (n != NULL) {
             if (n->key == key) {
                 return n->data;
             }
@@ -92,7 +92,7 @@ public:
         for (int i = 0; i < SIZE; i++) {
             cout << "(" << table[i]->key << "," << table[i]->data << ")";
             Node* n = table[i]->next;
-            while (n != nullptr) {
+            while (n != NULL) {
                 cout << " (" << n->key << "," << n->data << ")";
                 n = n->next;
             }
