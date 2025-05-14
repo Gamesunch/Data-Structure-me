@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+#include <stack>
 using namespace std;
 
 struct Node {
@@ -13,7 +14,6 @@ struct Node {
     }
 };
 
-// Function to search a key in a BST
 Node* search(Node* root, int key) {
     if (root == NULL || root->key == key)
         return root;
@@ -43,25 +43,26 @@ Node* insert(Node* root, int key) {
     return root;
 } 
 
-// Function to delete a node from the BST
 Node* deleteNode(Node* root, int key) {
-    if (root == NULL) { //if the tree is empty.
+    if (root == NULL) {
         cout<<"Empty Tree"<<endl;
         return root;
     } 
 
-    // Recursive calls to find the node to delete
+    
     if (key < root->key) {
         root->left = deleteNode(root->left, key);
     } else if (key > root->key) {
         root->right = deleteNode(root->right, key);
     } else {
+    	
         // Case 1: Node has no children (leaf node)
         if (root->left == NULL && root->right == NULL) {
             delete root;
             root = NULL;
             return root;
         }
+        
         // Case 2: Node has only one child
         else if (root->left == NULL) {
             Node* temp = root->right;
@@ -111,6 +112,26 @@ void showBFS(Node* root) {
     cout << "|";
 }
 
+//Depth First Traversal
+void showDFS(Node* root) {
+    if (root == NULL) return;
+
+    stack<Node*> st;
+    st.push(root);
+
+    while (!st.empty()) {
+        Node* current = st.top();
+        st.pop();
+
+        cout << current->key << ",";
+
+        
+        if (current->right) st.push(current->right);
+        if (current->left) st.push(current->left);
+    }
+
+    cout << endl;
+}
 
 // Inorder traversal
 void inorder(Node* root) {
@@ -139,7 +160,6 @@ void postorder(Node* root) {
     cout << root->key << ",";
 }
 
-// Driver Code
 int main() {
     Node* root = NULL;
     char inp;
@@ -166,6 +186,9 @@ int main() {
         } else if (inp == 't') {
             postorder(root);
             cout << endl;
+        } else if (inp == 'f') {
+            showDFS(root);
+            cout<<endl;
         } else if (inp == 'x') {
             break;
         }
