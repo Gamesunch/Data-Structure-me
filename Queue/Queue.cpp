@@ -11,7 +11,7 @@ class Queue{
 		
 		bool full(){
 			// can use (head % size) + (tail % size) + 1 == size
-			// instead of function for loop that reduce performance from O(n) to O(1)
+			// instead of function for loop that increase performance from O(n) to O(1)
 			return s() == size;
 		}
 		
