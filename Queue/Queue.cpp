@@ -10,8 +10,7 @@ class Queue{
 		int tail = -1;
 		
 		bool full(){
-			// can use (head % size) + (tail % size) + 1 == size
-			// instead of function for loop that increase performance from O(n) to O(1)
+			// can use int count to initial value in this so it would be O(1)
 			return s() == size;
 		}
 		
